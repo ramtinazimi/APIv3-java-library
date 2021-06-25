@@ -1070,8 +1070,29 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //partnerKey.setApiKeyPrefix("Token");
 
+// Create a sender
+SendSmtpEmailSender sender = new SendSmtpEmailSender();
+sender.setName("Service");
+sender.setEmail("service@example.com");
+
+// Create a recipient
+SendSmtpEmailTo  recipient = new SendSmtpEmailTo();
+recipient.setName("Example Recipient Name");
+recipient.email("example_recipient@gmail.com");
+
+
+
 TransactionalEmailsApi apiInstance = new TransactionalEmailsApi();
 SendSmtpEmail sendSmtpEmail = new SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
+
+// Set mandatory values for email if teplate id is not used.
+sendSmtpEmail.sender(sender);
+sendSmtpEmail.addToItem(recipient);
+
+sendSmtpEmail.setSubject("Hello");
+sendSmtpEmail.setHtmlContent("Hello, here comes an email.");
+
+
 try {
     CreateSmtpEmail result = apiInstance.sendTransacEmail(sendSmtpEmail);
     System.out.println(result);
